@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import time
 from typing import Any
+from dotenv import load_dotenv
+load_dotenv()
 
 import streamlit as st
 
@@ -19,6 +21,22 @@ from utils import (
 
 st.set_page_config(page_title="Goal Detector", page_icon=":dart:", layout="centered")
 
+def show_results() -> None:
+    responses = st.session_state.get("responses", {})
+    profile = st.session_state.get("profile", {})
+
+    # Try API first, fallback to static goals
+    results = try_openai_roadmap(responses, profile)
+
+    if results is None:
+        # Fallback: use your existing static logic
+        goals = load_goals()
+        results = recommend_goals(responses, goals)
+        results = build_interest_roadmap(results, responses)
+
+    st.session_state.results = results
+    st.session_state.page = "results"
+    st.rerun()
 
 def inject_css() -> None:
     st.markdown(
@@ -585,6 +603,28 @@ def questionnaire() -> dict[str, Any] | None:
                 "motivation": st.session_state.get("q_motivation", []),
                 "community": st.session_state.get("q_community", "Solo"),
             }
+        
+        if done:
+    # Collect ALL responses into a single dict
+         st.session_state.responses = {
+          "context": st.session_state.get("q_context", ""),
+          "age_range": st.session_state.get("q_age_range", "Prefer not to say"),
+          "interests": st.session_state.get("q_interests", []),
+          "topics": st.session_state.get("q_topics", ""),
+          "outcome": st.session_state.get("q_outcome", ""),
+          "long_term_vision": st.session_state.get("q_long_term_vision", ""),
+          "family_expectations": st.session_state.get("q_family_expectations", ""),
+          "influence": st.session_state.get("q_influence", "Prefer not to say"),
+          "time_per_week": st.session_state.get("q_time_per_week", "3-5"),
+          "style": st.session_state.get("q_style", "Mixed"),
+          "mood": st.session_state.get("q_mood", "Prefer not to say"),
+          "constraints": st.session_state.get("q_constraints", []),
+          "hard_nos": st.session_state.get("q_hard_nos", ""),
+          "motivation": st.session_state.get("q_motivation", []),
+          "community": st.session_state.get("q_community", "Solo"),
+    }
+    st.session_state.page = "results"
+    st.rerun()
 
     st.markdown("</div></div>", unsafe_allow_html=True)
     return None
