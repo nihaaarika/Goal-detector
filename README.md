@@ -1,5 +1,4 @@
-
-readme_content = """# 🎯 Goal Detector
+"""# 🎯 Goal Detector
 
 <br/>
 
