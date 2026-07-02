@@ -1,10 +1,6 @@
 
 readme_content = """# 🎯 Goal Detector
 
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=venom&color=gradient&customColorList=12,14,16,18,20&height=220&section=header&text=Goal%20Detector&fontSize=55&fontColor=ffffff&animation=fadeIn&desc=AI-Powered%20Goal%20%26%20Career%20Discovery&descSize=18&descAlignY=65"/>
-
 <br/>
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://bharatverse-dkwxkxhhgnmnqwarbhx449.streamlit.app/)
