@@ -1,5 +1,6 @@
-### 🎯 Goal Detector
+<div align="center">
 
+# 🎯Goal detector
 <br/>
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://bharatverse-dkwxkxhhgnmnqwarbhx449.streamlit.app/)
